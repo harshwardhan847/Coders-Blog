@@ -34,17 +34,15 @@ export interface IArticleAttributes{
 }
 export interface IAuthor{
     data:{
+        id:number;
         attributes:{
-            firstName:string;
+            username:string;
             lastName:string;
             avatar:{
                 data:{
                     attributes:{
-                        formats:{
-                            thumbnail:{
-                                url:string;
-                            }
-                        }
+                        url:string;
+                        
                     }
                 }
             }
@@ -61,5 +59,17 @@ export interface IImageData {
                 }
             }
         }
+    }
+}
+
+export type TDirection = 1|-1;
+
+export interface IQueryOptions {
+    filters?:any;
+    sort:any;
+    populate:any;
+    pagination:{
+        page:number;
+        pageSize:number;
     }
 }

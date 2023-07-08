@@ -1,9 +1,11 @@
 "use client";
 import { ICategory } from "@/types";
+import { debounce } from "@/utils";
 import Link from "next/link";
 import {
-  ReadonlyURLSearchParams,
+  useParams,
   usePathname,
+  useRouter,
   useSearchParams,
 } from "next/navigation";
 
@@ -12,41 +14,53 @@ type Props = {
 };
 
 const Tabs = ({ categories }: Props) => {
-  const searchParams = useSearchParams();
+  const params = useParams();
   const pathname = usePathname();
-  console.log(pathname);
-  const isActiveLink = (category: ICategory) => {
-    console.log(searchParams);
-    return category.attributes.Slug === searchParams.category ? true : false;
+  const router = useRouter();
+  const isActiveLink = (slug: string) => {
+    return slug === params.category ? true : false;
   };
-  function handleOnSearch(value: string) {
-    console.log("handling on search");
+  function handleOnSearch(e: Event) {
+    const value = e.target?.value;
+    if (!value) {
+      if(params.category){
+        router.push(`/category/${params.category}`)
+      }else{
+        router.push("/");
+      }
+      return;
+    }
+    if (params.category) {
+      router.push(`/category/${params.category}/?search=${value}`);
+      return
+    } 
+    router.push(`/?search=${value}`);
   }
   return (
     <div className="my-8 flex items-center justify-between border-b-2 border-gray-100">
       <ul className="flex items-center">
         <li
           className={
-            "mr-6 pb-4 border-b-4 rounded-sm " +
+            "mr-6 pb-4 rounded-sm " +
             `${
               pathname === "/"
-                ? "border-primary text-primary"
-                : "border-white text-gray-400"
+                ? " text-primary border-b-4 border-b-primary"
+                : " border-white text-gray-400"
             }`
           }
         >
-          <Link href="#">Recent</Link>
+          <Link href="/">Recent</Link>
         </li>
         {categories.map((category: ICategory) => {
           return (
             <li
               key={category.id}
               className={
-                "mr-6 pb-4 border-b-4 rounded-sm" +
+                "mr-6 pb-4 rounded-sm" +
                 `${
-                  isActiveLink(category)
-                    ? "border-primary text-primary"
-                    : "border-white text-gray-400"
+                  isActiveLink(category.attributes.Slug)
+                    ? " border-b-primary text-primary border-b-4"
+                    : " text-gray-400"
                 }`
               }
             >
@@ -68,7 +82,7 @@ const Tabs = ({ categories }: Props) => {
         </svg>
         <input
           type="text"
-          onChange={(e) => handleOnSearch(e.target.value)}
+          onChange={debounce(handleOnSearch, 500)}
           placeholder="Search"
           className="outline-none px-2 py-1 ml-1"
         />
