@@ -6,7 +6,6 @@ import {
   useParams,
   usePathname,
   useRouter,
-  useSearchParams,
 } from "next/navigation";
 
 type Props = {
@@ -20,7 +19,7 @@ const Tabs = ({ categories }: Props) => {
   const isActiveLink = (slug: string) => {
     return slug === params.category ? true : false;
   };
-  function handleOnSearch(e: Event) {
+  function handleOnSearch(e: any) {
     const value = e.target?.value;
     if (!value) {
       if(params.category){

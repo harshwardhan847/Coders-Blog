@@ -1,7 +1,7 @@
+'use client'
 import Navbar from '@/components/Navbar'
 import './globals.css'
 import Footer from '@/components/Footer'
-
 export const metadata = {
   title: 'Coders Blog',
   description: 'Spread your coding knowledge to others.',

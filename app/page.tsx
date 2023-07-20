@@ -24,7 +24,7 @@ async function Home({params,searchParams}: Props) {
     sort: ["id:desc"],
     pagination: {
       page: searchParams.page ? +searchParams.page : 1,
-      pageSize: 1,
+      pageSize: 10,
     },
   };
   if(searchParams.search){
