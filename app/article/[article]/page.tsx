@@ -71,7 +71,13 @@ const Article = async ({ params }: Props) => {
         <MDXRemote source={article.data[0].attributes.body} />
         
       </div>
-      <div>Right</div>
+      <div className="w-full flex flex-col items-start m-2 gap-4">
+        <h2 className="text-start font-bold w-full">Signup to our newsletter</h2>
+        <p className="font-normal text-base">Get the latest article on all things data delivered straight to your inbox.</p>
+        <input type="text" className="p-2 w-full rounded border-2 placeholder:text-slate-800 border-slate-300" placeholder="Your work email" />
+        <button className="border-2 w-fit border-primary p-2 text-primary font-bold">Subscribe</button>
+        
+      </div>
     </div>
   );
 };

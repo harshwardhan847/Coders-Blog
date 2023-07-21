@@ -42,7 +42,7 @@ const Category = async ({ params,searchParams }: Props) => {
     },
     pagination: {
       page: searchParams.page ? searchParams.page : 1,
-      pageSize: 10,
+      pageSize: 4,
     },
   };
   if(searchParams.search){

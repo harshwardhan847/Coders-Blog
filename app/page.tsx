@@ -13,7 +13,11 @@ type Props = {
     search: string;
   };
 };
-
+export const metadata=()=>{
+  return {
+    title: "Coders Blog",
+  }
+}
 async function Home({params,searchParams}: Props) {
   const data: AxiosResponse<ICollectionResponse<ICategory[]>> =
     await fetchCategories();
@@ -24,7 +28,7 @@ async function Home({params,searchParams}: Props) {
     sort: ["id:desc"],
     pagination: {
       page: searchParams.page ? +searchParams.page : 1,
-      pageSize: 10,
+      pageSize: 4,
     },
   };
   if(searchParams.search){

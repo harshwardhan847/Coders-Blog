@@ -9,9 +9,9 @@ const BlogCardWithImage = ({ article }: Props) => {
   return (
     <div className="bg-gradient-to-r from-violet-500 to-violet-900 rounded-md flex justify-between items-center h-64">
       <Link href={`/article/${article.attributes.slug}`}>
-        <span className="text-2xl w-2/3 text-white p-6 font-bold after:content-[''] after:bg-primary after:ml-6 after:block after:w-16 after:h-1 after:rounded-md after:mt-2 cursor-pointer">
+        <div className="text-2xl w-full text-start text-white p-6 font-bold after:content-[''] after:bg-primary after:ml-0 after:block after:w-24 after:h-1 after:rounded-md after:mt-2 cursor-pointer">
           {article.attributes.Title}
-        </span>
+        </div>
       </Link>
       <svg
         xmlns="http://www.w3.org/2000/svg"
